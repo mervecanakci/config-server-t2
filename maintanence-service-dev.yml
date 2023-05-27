@@ -1,14 +1,11 @@
 spring:
   application:
-    name: maintanence-service
+    name: maintenance-service
   datasource:
-    username: postgres
-    password: '12345'
-    url: jdbc:postgresql://localhost:5432/maintenancedb-t2
+    username: root
+    password: 12345
+    url: jdbc:mysql://localhost:3306/maintenancedb-t2?createDatabaseIfNotExist=true
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
   kafka:
@@ -27,7 +24,13 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
-    instance-id: ${spring.application.name}:${random.value}
+    instance-id: ${spring.application.name}:${random.value}}
     prefer-ip-address: true
 server:
   port: 0
+resilience4j:
+  retry:
+    instances:
+      retry-maintenance:
+        max-attempts: 5
+        wait-duration: 30s
