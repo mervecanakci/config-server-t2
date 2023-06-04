@@ -16,6 +16,16 @@ spring:
       bootstrap-servers: http://localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: http://localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
   cloud:
     openfeign:
       circuitbreaker:
@@ -31,9 +41,3 @@ eureka:
     prefer-ip-address: true
 server:
   port: 0
-resilience4j:
-  retry:
-    instances:
-      retry-maintenance:
-        max-attempts: 5
-        wait-duration: 30s
