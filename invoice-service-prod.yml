@@ -3,8 +3,8 @@ spring:
     name: invoice-service
   data:
     mongodb:
-      database: invoicedb-t2
-      uri: mongodb://localhost:27026
+      database: invoicedb
+      uri: mongodb://localhost:27018
   kafka:
     consumer:
       auto-offset-reset: earliest
@@ -26,4 +26,4 @@ eureka:
     instance-id: ${spring.application.name}:${random.value}
     prefer-ip-address: true
 server:
-  port: 0
+  port: 00
